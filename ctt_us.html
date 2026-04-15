@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url("Images/BG.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .top-nav {
+                max-width: 1400px;
+                margin: 0 auto 30px auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #000000;
+            }
+
+            .main-title-link {
+                text-decoration: none;
+                color: #ffff;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 15px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin: 0;
+            }
+
+        label {
+            color: white;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-container {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .title {
+            display: inline-block;
+            color: rgba(113, 194, 238, 0.71);
+            padding: 10px 10px;
+            border-radius: 20px;
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .nav-btn {
+                text-decoration: none;
+                color: #333;
+                background-color: #fff;
+                padding: 8px 20px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                border: 1px solid transparent;
+            }
+
+            .nav-btn:hover {
+                background-color: #000;
+                color: #fff;
+                transform: translateY(-2px);
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="top-nav">
+
+        <a href="Index.html" class="main-title-link">
+            <h1 class="main-title"><strong>Cosnime</strong></h1>
+        </a>s
+
+        <nav class="nav-links">
+            <a href="Index.html" class="nav-btn">Home</a>
+            <a href="AnimeNews.html" class="nav-btn">Anime News</a>
+            <a href="anime-recommend.html" class="nav-btn">Anime Recommendation</a>
+            <a href="Cos_news.html" class="nav-btn">Cosplay News</a>
+            <a href="cosplay-gallery.html" class="nav-btn">Cosplay Gallery</a>
+            <a href="event-calendar.html" class="nav-btn">Event Calender</a>
+            <a href="AboutUs.html" class="nav-btn">About Us</a>
+            <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+        </nav>
+
+    </div>
+
+    <div class="hero-content">
+        <h1 class="title">📩 Contact Us</h1>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="form-container">
+
+                    <form id="contactForm">
+
+                        <div class="mb-3">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Message</label>
+                            <textarea class="form-control" id="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let name = document.getElementById("name").value;
+
+            // Save to session storage
+            sessionStorage.setItem("username", name);
+
+            alert("Thank you " + name + "! Your message has been sent.");
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    <style>
+        body {
+            background-color: #b5dbf8;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', "Microsoft YaHei", sans-serif;
+
+        }
+
+        .top-nav {
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        .main-title-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .main-title {
+            font-size: 2rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px 60px 20px;
+            /* 缩小顶部，保持底部间距 */
+            font-family: 'Rockwell', serif;
+        }
+
+        .about-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 80px;
+            gap: 40px;
+        }
+
+        .about-row:first-child {
+            margin-top: 0;
+        }
+
+        .background-dark {
+            background-color: #6e801a;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .background-light {
+            background-color: #fafafa;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .about-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .about-image,
+        .about-content {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 28pt;
+            margin-bottom: 20px;
+            text-decoration: underline;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .about-content p,
+        .about-content li {
+            font-size: 18pt;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .sub-title {
+            font-size: 36pt;
+            font-family: Rockwell;
+            text-align: center;
+            color: #9b1212;
+            margin-bottom: 0;
+        }
+
+        .sub-title p {
+            margin: 10px 0;
+        }
+
+        .background-dark .section-title,
+        .background-dark .about-content p,
+        .background-dark .about-content li {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                margin: 5px 2px;
+            }
+
+            .about-row,
+            .about-row.reverse {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 22pt;
+            }
+
+            .about-image {
+                width: 100%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-nav">
+
+        <a href="Index.html" class="main-title-link">
+            <h1 class="main-title"><strong>Cosnime</strong></h1>
+        </a>
+
+        <nav class="nav-links">
+            <a href="Index.html" class="nav-btn">Home</a>
+            <a href="AnimeNews.html" class="nav-btn">Anime News</a>
+            <a href="anime-recommend.html" class="nav-btn">Anime Recommendation</a>
+            <a href="Cos_news.html" class="nav-btn">Cosplay News</a>
+            <a href="cosplay-gallery.html" class="nav-btn">Cosplay Gallery</a>
+            <a href="event-calendar.html" class="nav-btn">Event Calender</a>
+            <a href="AboutUs.html" class="nav-btn">About Us</a>
+            <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+        </nav>
+
+    </div>
+
+    <div class="sub-title">
+        <p><strong><i>About Us</i></strong></p>
+    </div>
+
+    <section class="about-container">
+        <div class="about-row background-dark">
+            <div class="about-image">
+                <img src="Images/ObjectiveImage.jpg" alt="Our Objective">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">Our Objective</h2>
+                <p>To establish a premier digital hub that bridges the gap between anime enthusiasts and the latest
+                    industry intelligence. We strive to provide a seamless, high-performance platform where fans can
+                    access real-time updates, technical insights, and deep-dive analyses into the ever-evolving world of
+                    animation.</p>
+            </div>
+        </div>
+
+        <div class="about-row reverse background-light">
+            <div class="about-image">
+                <img src="Images/VisionImage.jpg" alt="Our Vision">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">Our Vision</h2>
+                <p>To become the most trusted and influential anime news ecosystem in the digital age, setting the
+                    standard for technical excellence and storytelling in anime journalism. We envision a future where
+                    technology and passion converge to enhance the global anime community's experience.</p>
+            </div>
+        </div>
+
+        <div class="about-row background-dark">
+            <div class="about-image">
+                <img src="Images/MissionImage.jpg" alt="Our Mission">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">Our Mission</h2>
+                <p>Our mission is to deliver high-fidelity content and innovative web experiences. We are committed to
+                    optimizing information delivery through cutting-edge web technologies, ensuring that every user
+                    stays informed, inspired, and connected to the heartbeat of the anime industry.</p>
+            </div>
+        </div>
+
+        <div class="about-row reverse background-light">
+            <div class="about-image">
+                <img src="Images/ValueImage.jpg" alt="Core Values">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">Core Values</h2>
+                <ul>
+                    <li><strong>Technical Precision:</strong> Striving for clean, efficient, and high-performance
+                        solutions.</li>
+                    <li><strong>Authenticity:</strong> Delivering neutral and fact-checked news to our community.</li>
+                    <li><strong>Innovation:</strong> Continuously evolving our platform to meet modern standards.</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

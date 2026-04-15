@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosplay News</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url("Images/Blue.webp");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            .news-card {
+                transition: transform 0.3s;
+            }
+
+            .news-card:hover {
+                transform: scale(1.05);
+            }
+
+            .content-box {
+                font-size: 32px;
+                background: rgba(0, 0, 0, 0.6);
+                padding: 20px;
+                border-radius: 10px;
+                color: white;
+                margin-top: 20px;
+            }
+
+            .top-nav {
+                max-width: 1400px;
+                margin: 0 auto 30px auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #000000;
+            }
+
+            .main-title-link {
+                text-decoration: none;
+                color: #ffff;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 15px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin: 0;
+            }
+
+            .item-text {
+                font-size: 42px;
+                font-weight: bold;
+            }
+
+            .hero-content {
+                text-align: center;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .title {
+                display: inline-block;
+                color: rgba(113, 194, 238, 0.71);
+                text-shadow: 0 0 5px rgba(12, 160, 246, 0.7);
+                background-color: #fff;
+                padding: 10px 10px;
+                border-radius: 20px;
+                font-size: 48px;
+                font-weight: bold;
+                margin-bottom: 15px;
+            }
+
+            .title2 {
+                display: inline-block;
+                color: rgba(113, 194, 238, 0.71);
+                text-shadow: 0 0 10px rgba(0, 139, 253, 0.7);
+                background-color: #fff;
+                padding: 8px 20px;
+                border-radius: 20px;
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+
+            .nav-btn {
+                text-decoration: none;
+                color: #333;
+                background-color: #fff;
+                padding: 8px 20px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                border: 1px solid transparent;
+            }
+
+            .nav-btn:hover {
+                background-color: #000;
+                color: #fff;
+                transform: translateY(-2px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="top-nav">
+
+        <a href="Index.html" class="main-title-link">
+            <h1 class="main-title"><strong>Cosnime</strong></h1>
+        </a>s
+
+        <nav class="nav-links">
+            <a href="Index.html" class="nav-btn">Home</a>
+            <a href="AnimeNews.html" class="nav-btn">Anime News</a>
+            <a href="anime-recommend.html" class="nav-btn">Anime Recommendation</a>
+            <a href="Cos_news.html" class="nav-btn">Cosplay News</a>
+            <a href="cosplay-gallery.html" class="nav-btn">Cosplay Gallery</a>
+            <a href="event-calendar.html" class="nav-btn">Event Calender</a>
+            <a href="AboutUs.html" class="nav-btn">About Us</a>
+            <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+        </nav>
+
+    </div>
+
+    <!-- Header -->
+    <div class="hero-content">
+        <h1 class="title">Cosplay News</h1>
+        <p class="title2">Latest trends, events, and cosplay highlights</p>
+    </div>
+
+    <!-- News Section -->
+    <div class="container">
+        <div class="row">
+
+            <!-- News 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card news-card">
+                    <img src="Images/Anime-expo.webp" class="card-img-top">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Anime Expo 2026 Highlights</h5>
+                        <p class="card-text">Top cosplayers amazed fans with stunning outfits.</p>
+                        <button class="btn btn-primary" onclick="showContent('Anime Expo 2026')">Read More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card news-card">
+                    <img src="Images/Gene.png" class="card-img-top">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Top 10 Cosplay Ideas</h5>
+                        <p class="card-text">Explore trending cosplay ideas this year.</p>
+                        <button class="btn btn-primary" onclick="showContent('Top 10 Cosplay')">Read More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card news-card">
+                    <img src="Images/OIP.jpg" class="card-img-top">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Beginner Cosplay Tips</h5>
+                        <p class="card-text">Start your cosplay journey with these tips.</p>
+                        <button class="btn btn-primary" onclick="showContent('Beginner Tips')">Read More</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="extra-content" style="margin-top: 40px;">
+
+        <!-- Anime Expo -->
+        <div id="Anime Expo 2026" class="content-box" style="display:none;">
+            <h2>Anime Expo 2026 Schedule</h2>
+            <ul>
+                <li>
+                    <img src="Images/day1.jpg">
+                    Day 1: Opening Ceremony & Cosplay Parade
+                </li>
+                <li> <img src="Images/day2.jpg">
+                    Day 2: Anime Panels & Guest Meet</li>
+                <li> <img src="Images/day3.jpg">
+                    Day 3: Cosplay Competition Finals</li>
+                <li><img src="Images/day4.jpg">
+                    Day 4: Closing Ceremony</li>
+            </ul>
+        </div>
+
+        <!-- Top 10 Cosplay -->
+        <div id="Top 10 Cosplay" class="content-box" style="display:none;">
+            <h2>Top 10 Cosplay Ideas</h2>
+            <ol>
+                <li><img src="Images/naruto.jpg"> <span class="item-text">Naruto</span></li>
+                <li><img src="Images/gojo.jpg"> <span class="item-text">Gojo</span></li>
+                <li><img src="Images/mikasa.jpg"> <span class="item-text">Mikasa</span></li>
+                <li><img src="Images/tanjiro.jpg"> <span class="item-text">Tanjiro</span></li>
+                <li><img src="Images/nezuko.jpg"> <span class="item-text">Nezuko</span></li>
+                <li><img src="Images/levi.jpg"> <span class="item-text">Levi</span></li>
+                <li><img src="Images/luffy.jpg"> <span class="item-text">Luffy</span></li>
+                <li><img src="Images/02.jpg"> <span class="item-text">Zero Two</span></li>
+                <li><img src="Images/asuka.jpg"> <span class="item-text">Asuka</span></li>
+                <li><img src="Images/genshin.jpg"> <span class="item-text">Genshin Characters</span></li>
+            </ol>
+        </div>
+
+        <!-- Beginner Tips -->
+        <div id="Beginner Tips" class="content-box" style="display:none;">
+            <h2>Beginner Cosplay Tips</h2>
+            <ul>
+                <li>Start with simple costumes</li>
+                <li>Use budget-friendly materials</li>
+                <li>Be confident and have fun</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        function saveNews(newsTitle) {
+            localStorage.setItem("lastViewedNews", newsTitle);
+            alert("Welcome to " + newsTitle + " page");
+        }
+    </script>
+
+    <script>
+        function showContent(section) {
+            // Hide all sections
+            let contents = document.querySelectorAll(".content-box");
+            contents.forEach(c => c.style.display = "none");
+
+            // Show selected section
+            document.getElementById(section).style.display = "block";
+
+            // Scroll down smoothly
+            document.getElementById(section).scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
+
+</body>
+
+</html>

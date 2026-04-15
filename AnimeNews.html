@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime News - Full Weekly Grid</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #b5dbf8;
+        }
+
+        .main-title-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .top-nav {
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        .main-title {
+            font-size: 2rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+        }
+
+        .sub-title {
+            font-size: 36pt;
+            font-family: Rockwell;
+            text-align: center;
+            color: #9b1212;
+        }
+
+        .date-divider-bar {
+            max-width: 1400px;
+            margin: 60px auto 20px auto;
+            background-color: #000000;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            border-radius: 4px;
+        }
+
+        .date-capsule {
+            background-color: #ffffff;
+            color: #9b1212;
+            padding: 2px 20px;
+            border-radius: 50px;
+            font-size: 12pt;
+            margin-left: 8px;
+        }
+
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .anime-card {
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        .image-box {
+            width: 100%;
+            transition: transform 0.6s ease;
+            transform-origin: center;
+        }
+
+        .image-box img {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .anime-details {
+            display: none;
+            padding: 30px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+
+        .anime-card.active {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            background: #f9f9f9;
+            cursor: default;
+        }
+
+        .anime-card.active .image-box {
+            flex: 0 0 300px;
+            padding: 20px;
+            transform: perspective(1000px) rotateY(25deg);
+        }
+
+        .anime-card.active .anime-details {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+            flex: 1;
+        }
+
+        .anime-details h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24pt;
+        }
+
+        .anime-details p {
+            font-size: 20pt;
+            font-family: 'Rockwell', serif;
+            line-height: 1.4;
+            text-align: justify;
+        }
+
+        @media (max-width: 1024px) {
+            .anime-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .anime-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .anime-card.active {
+                flex-direction: column;
+            }
+
+            .anime-card.active .image-box {
+                transform: none;
+                width: 100%;
+                flex: none;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                padding: 6px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-nav">
+
+        <a href="Index.html" class="main-title-link">
+            <h1 class="main-title"><strong>Cosnime</strong></h1>
+        </a>
+
+        <nav class="nav-links">
+            <a href="Index.html" class="nav-btn">Home</a>
+            <a href="AnimeNews.html" class="nav-btn">Anime News</a>
+            <a href="anime-recommend.html" class="nav-btn">Anime Recommendation</a>
+            <a href="Cos_news.html" class="nav-btn">Cosplay News</a>
+            <a href="cosplay-gallery.html" class="nav-btn">Cosplay Gallery</a>
+            <a href="event-calendar.html" class="nav-btn">Event Calender</a>
+            <a href="AboutUs.html" class="nav-btn">About Us</a>
+            <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+        </nav>
+
+    </div>
+
+    <div class="sub-title">
+        <p><strong><i>Anime News</i></strong></p>
+    </div>
+    <div class="date-divider-bar">
+        <div class="date-capsule">13/04/2026</div>
+    </div>
+
+    <div class="anime-grid">
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/BlueLock.jpg" alt="Blue Lock: VS. U-20 Japan"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Blue Lock: U-20 Match Hits Peak Viewership</u></i></strong></h2>
+                <p>The latest episode of "Blue Lock: VS. U-20 Japan" has officially broken streaming records across
+                    Asia. Critics are praising the fluid transition between 2D action and CGI tactical overlays during
+                    Isagi's "flow state" sequences. Production IG has confirmed that the final three episodes of this
+                    cour will feature extended broadcast slots to capture the match's conclusion without cuts.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/Dandadan2.jpg" alt="Dandadan Part 2"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Science Saru Unveils "Dandadan" Part 2 PV</u></i></strong></h2>
+                <p>A new promotional video for Dandadan Part 2 has been released, showcasing the arrival of the "Evil
+                    Eye" arc. Director Fuga Yamashiro noted in a recent interview that the production team utilized new
+                    experimental coloring techniques to match Tatsu Yukinobu's vibrant manga art. The opening theme,
+                    performed by a surprise collaborative unit, was also previewed for the first time.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/GintamaSpecial.jpg"
+                    alt="Gintama 20th Anniversary Special"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Gintama 20th Anniversary Event Announced</u></i></strong></h2>
+                <p>The "Gintama 20th Anniversary: Not Really the Final" event was officially greenlit this morning. The
+                    special will reportedly parody the recent trend of "AI-generated scripts" in the industry. Early
+                    ticket sales for the live viewing event in Tokyo sold out within seconds, proving that the
+                    Yorozuya's popularity remains unshakable even years after the manga's conclusion.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/IWantToEndThisLoveGame.jpg"
+                    alt="I Want to End This Love Game"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Love Game" Lead Voice Cast Revealed</u></i></strong></h2>
+                <p>The highly anticipated adaptation of "I Want to End This Love Game" has finally announced its lead
+                    seiyuu. During a special livestream, it was confirmed that the protagonists will be voiced by rising
+                    stars in the industry, aiming for a "fresh and naturalistic" tone. The anime is slated for a Fall
+                    2026 premiere, with Studio Drive handling the production.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/GhostConcert.jpg" alt="Ghost Concert: Missing Songs">
+            </div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Ghost Concert" Project Expands Globally</u></i></strong></h2>
+                <p>Musical series "Ghost Concert: Missing Songs" has announced a global distribution partnership. Beyond
+                    the anime, the project will include "Augmented Reality" concerts where fans can view the characters
+                    performing in real-world venues. The soundtrack, featuring various vocaloid producers, has already
+                    topped the digital charts ahead of the first episode's broadcast.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="date-divider-bar">
+        <div class="date-capsule">12/04/2026</div>
+    </div>
+    <div class="anime-grid">
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/WandAndSword2.jpg"
+                    alt="Wistoria: Wand and Sword Season 2"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Wistoria S2: New Staff Additions Confirmed</u></i></strong></h2>
+                <p>As production ramps up for the second season of Wistoria, several veteran action animators from the
+                    "Fate" series have reportedly joined the staff. This move signals a massive boost in visual quality
+                    for the upcoming "Terminals" arc. A special teaser visual featuring Will and Elfaria standing atop
+                    the Magia Vander tower was also leaked online today.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/YozakuraFamily2.jpg"
+                    alt="Mission: Yozakura Family Season 2"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Yozakura Family Season 2 Visual Released</u></i></strong></h2>
+                <p>The official website for "Mission: Yozakura Family" has updated with a high-stakes key visual for
+                    Season 2. The image depicts Taiyo facing off against the mysterious leader of the Tampopo
+                    organization. Studio Silver Link promised that the upcoming season will delve into a darker, more
+                    action-heavy tone compared to the lighthearted early episodes.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/OnePieceElbaph.jpg" alt="One Piece Elbaph Arc"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>One Piece: Elbaph Arc Enters Production</u></i></strong></h2>
+                <p>Toei Animation has officially started the countdown for the "Elbaph" story arc. Rumors from the
+                    studio suggest a complete overhaul of the background art style to emphasize the giant scale of the
+                    land. Following the success of the recent "Egghead" arc's art style, the team plans to continue
+                    experimenting with vibrant colors and fluid line work.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/AceOfDiamond2.jpg"
+                    alt="Ace of the Diamond act II Season 2"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Ace of Diamond Act II Returns This Summer</u></i></strong></h2>
+                <p>Fans of the sports genre rejoice as the premiere date for the second season of "Ace of the Diamond
+                    Act II" has been set for July 2026. The series will cover the highly anticipated summer qualifiers.
+                    Madhouse has assured fans that the intensity of the pitching duels will be emphasized through
+                    enhanced sound design and dynamic camera work.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/FourSeasons.jpg" alt="Agent of the Four Seasons Anime">
+            </div>
+            <div class="anime-details">
+                <h2><strong><i><u>CloverWorks to Adapt "Four Seasons" Novels</u></i></strong></h2>
+                <p>The award-winning light novel series by Kana Akatsuki is finally getting an anime adaptation by
+                    CloverWorks. The announcement trailer showcases the stunning character designs by Namanie, brought
+                    to life with the studio's signature high-budget aesthetic. The series is expected to be a major
+                    contender for the "Anime of the Year" title upon its release.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="date-divider-bar">
+        <div class="date-capsule">11/04/2026</div>
+    </div>
+    <div class="anime-grid">
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/FistOfTheNorthStar.jpg" alt="Hokuto no Ken Prime"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Hokuto No Ken Reboot: First Look at Kenshiro</u></i></strong></h2>
+                <p>Prime Video has released the first character teaser for the "Hokuto no Ken" reboot. The animation,
+                    handled by Warner Bros. Japan, utilizes a "high-pressure" linework style that pays homage to the 80s
+                    original while incorporating modern lighting effects. Fans are already praising the decision to
+                    stick to the manga's original brutal aesthetic.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/KillBlue.jpg" alt="Kill Blue Premiere"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Kill Blue" Anime Adaptation Officially Greenlit</u></i></strong></h2>
+                <p>Weekly Shonen Jump's hit series "Kill Blue" is making the jump to TV. The story of an elite assassin
+                    turned middle schooler will be brought to life by Studio MAPPA. The production committee stated that
+                    balancing the intense assassin action with the comedic school life is their top priority for the
+                    first season's script.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/YowayowaSensei.jpg" alt="Yowayowa Sensei"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Yowayowa Sensei" Teaser Site Goes Live</u></i></strong></h2>
+                <p>A teaser website for the "Yowayowa Sensei" anime has launched, featuring a countdown ending in three
+                    days. Leaked documents suggest that a veteran rom-com director is attached to the project, with
+                    expectations for a "healing" slice-of-life atmosphere. The voice actress for the clumsy teacher
+                    remains a closely guarded secret.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/DigimonBeatbreak.jpg" alt="Digimon Beatbreak"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>New Digimon Series "Beatbreak" Detailed</u></i></strong></h2>
+                <p>Bandai has revealed more details for the upcoming "Digimon Beatbreak." Unlike previous entries, this
+                    series will heavily feature musical rhythm as a combat mechanic. A tie-in mobile game is also in
+                    development, allowing players to synchronize their gameplay with the weekly anime broadcasts for
+                    exclusive digital rewards.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="date-divider-bar">
+        <div class="date-capsule">10/04/2026</div>
+    </div>
+    <div class="anime-grid">
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/DropsOfGod.jpg" alt="Drops of God Anime"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Drops of God" Anime: Wine Sommelier Consulted</u></i></strong></h2>
+                <p>Production for "The Drops of God" has taken an unusual turn as the studio hired world-class
+                    sommeliers to consult on the "visual tasting" sequences. The goal is to visually represent the
+                    complex flavors and scents of wine through abstract, artistic animation, creating a sensory
+                    experience for the audience.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/BotanKamiina.jpg" alt="Botan Kamiina"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Botan Kamiina" Anime to Feature Real Bars</u></i></strong></h2>
+                <p>In a unique collaboration, the "Botan Kamiina Fully Blossoms When Drunk" anime will feature actual
+                    locations from Tokyo's famous nightlife districts. The production team spent months scouting
+                    authentic bars to ground the supernatural comedy in a realistic urban setting. Limited-edition
+                    tie-in drinks are also planned.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/ScumOfBrave.jpg" alt="Scum of the Brave"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Scum of the Brave" Trailer Sparks Controversy</u></i></strong></h2>
+                <p>The first trailer for "Scum of the Brave" has sparked debate online due to its unapologetically
+                    anti-hero protagonist. Producers responded to the buzz, stating that the anime aims to satirize the
+                    "Hero" trope and provide a unique perspective on the fantasy genre. The series is trending globally
+                    on social media platforms.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/PrecureStar.jpg" alt="Star Detective Precure"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Precure" 2026 Theme: Space Detectives</u></i></strong></h2>
+                <p>Toei has officially registered the trademark for the next Precure series. The "Space Detective" theme
+                    will focus on puzzle-solving and mystery elements, a first for the franchise. The new merchandise
+                    line will include interactive "clue-finding" gadgets that sync with an official detective app for
+                    young fans.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/OverlordMovie.jpg" alt="Overlord The Sacred Kingdom">
+            </div>
+            <div class="anime-details">
+                <h2><strong><i><u>Overlord Movie: Box Office Estimates Soar</u></i></strong></h2>
+                <p>Ahead of its theatrical release, "Overlord: The Sacred Kingdom" is already projected to be one of the
+                    highest-grossing anime films of the year. Overseas distributors have confirmed a simultaneous global
+                    release window, ensuring that fans worldwide can witness the dark glory of Nazarick at the same
+                    time.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="date-divider-bar">
+        <div class="date-capsule">09/04/2026</div>
+    </div>
+    <div class="anime-grid">
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/Slime4.jpg" alt="Slime Season 4"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Slime" Season 4: World Map Expanded</u></i></strong></h2>
+                <p>The latest production update for "TenSura" Season 4 reveals a focus on the new territories outside
+                    the Jura Forest. The animation team at 8-bit has reportedly designed over 50 new monster species for
+                    the upcoming political arcs. Fans can expect a mix of heavy dialogue and massive-scale magical
+                    warfare.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/SnowballEarth.jpg" alt="Snowball Earth Premiere"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Snowball Earth" Wins Animation Award</u></i></strong></h2>
+                <p>Even before its full broadcast, "Snowball Earth" has received an "Innovation in Visuals" award at a
+                    recent industry festival. The judge's panel highlighted the studio's use of "sub-zero" lighting
+                    filters to create the feeling of a world frozen in time. The series is being hailed as the next
+                    sci-fi masterpiece.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/AngelNextDoor2.jpg" alt="Angel Next Door Season 2"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Angel Next Door" Season 2: New Visuals</u></i></strong></h2>
+                <p>A series of "Seasonal Visuals" for the second season of The Angel Next Door have been released,
+                    showcasing Amane and Mahiru in various autumn and winter school settings. The director mentioned
+                    that this season will focus on the "slow but steady" progression of their relationship as they face
+                    the future together.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/VillianessObservation.jpg"
+                    alt="An Observation Log of My Fiance"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Villainess Observation" Hits 1M Streams</u></i></strong></h2>
+                <p>The "Villainess Observation" anime has reached a major milestone within its first month of broadcast.
+                    The comedy's unique "dual perspective" storytelling has resonated with fans of the Otome-isekai
+                    genre. Studio Pierrot has hinted at a special OVA project if the sales for the Blu-ray volumes meet
+                    their targets.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/Kujima.jpg" alt="Kujima Why Sing"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Kujima" Anime: New Merchandise Lineup</u></i></strong></h2>
+                <p>The surreal star of "Kujima: Why Sing, When You Can Warble?" is getting its first official
+                    merchandise line. From life-sized plushies to bizarre "bird-seed" flavored snacks, the marketing
+                    team is leaning into the show's weirdness. The anime continues to be a viral hit on short-form video
+                    platforms.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="date-divider-bar">
+        <div class="date-capsule">08/04/2026</div>
+    </div>
+    <div class="anime-grid">
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/ReZero4.jpg" alt="Re:Zero Season 4"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Re:Zero S4: Pleiades Arc PV Breaks Records</u></i></strong></h2>
+                <p>The first full trailer for Re:Zero Season 4 has shattered records for most-watched anime PV in 24
+                    hours. The footage teases the grueling desert journey to the Watchtower, with fans speculating about
+                    the hidden identity of the "Shaula" character shown at the end. White Fox has promised their most
+                    ambitious work yet.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/RentAGirlfriend5.jpg" alt="Rent A Girlfriend Season 5">
+            </div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Rent-a-Girlfriend" S5: Final Teaser?</u></i></strong></h2>
+                <p>The fifth season of "Rent-a-Girlfriend" is being marketed with the tagline "The Final Confession."
+                    While the manga continues, the anime production committee hinted that this season might reach a
+                    definitive climax for the TV series. Controversy remains high among the fanbase regarding the pacing
+                    of Kazuya's development.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Images/DrStoneFuture.jpg" alt="Dr. Stone Science Future"></div>
+            <div class="anime-details">
+                <h2><strong><i><u>Dr. Stone Science Future: Rocket Specs Detailed</u></i></strong></h2>
+                <p>In a fascinating cross-promotion, the production team behind Dr. Stone released a "Science Breakdown"
+                    of the rocket featured in the upcoming cour. Real-life aerospace engineers were interviewed to
+                    discuss the feasibility of Senku's inventions, adding a layer of educational hype to the
+                    science-fiction series.</p>
+            </div>
+        </div>
+        <div class="anime-card" onclick="toggleCard(this)">
+            <div class="image-box"><img src="Imagess/HaibaraNewGame.jpg" alt="Haibara's Teenage New Game +">
+            </div>
+            <div class="anime-details">
+                <h2><strong><i><u>"Haibara's New Game+" Dominates Late-Night Slot</u></i></strong></h2>
+                <p>The "regret-themed" time travel series has become a sleeper hit, consistently winning its late-night
+                    broadcast slot. Psychologists have even weighed in on the show's popularity, attributing it to the
+                    "collective nostalgia" of the adult audience. Plans for a second season are already reportedly being
+                    discussed in internal meetings.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(card) {
+            if (card.classList.contains('active')) {
+                card.classList.remove('active');
+            } else {
+                document.querySelectorAll('.anime-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        }
+    </script>
+</body>
+
+</html>
