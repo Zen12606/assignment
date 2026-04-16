@@ -68,7 +68,7 @@
 
         .gallery-header {
             position: relative;
-            background-image: url('Images/CosplayGallery.webp');
+            background-image: url('images/CosplayGallery.webp');
             background-size: cover;
             background-position: center 30%;
             background-attachment: scroll;
@@ -465,15 +465,15 @@
                 id: 1,
                 name: "Naruto",
                 animeTitle: "Naruto / Naruto Shippuden",
-                coverImg: '<img src="Images/naruto.jpeg" alt="Naruto Series Cover">',
+                coverImg: '<img src="images/naruto.jpeg" alt="Naruto Series Cover">',
                 description: "The legendary ninja world featuring iconic characters like Naruto, Sasuke, Kakashi, and more!",
                 characters: [
-                    { name: "Naruto Uzumaki", coser: "@shark_rush", img: '<img src="Images/cosnaruto.jpeg" alt="Naruto Uzumaki Cosplay">', likes: 156 },
-                    { name: "Sasuke Uchiha", coser: "@mohanad_ismael21", img: '<img src="Images/cossasuke.jpeg" alt="Sasuke Uchiha Cosplay">', likes: 142 },
-                    { name: "Kakashi Hatake", coser: "@lucretius_mooka", img: '<img src="Images/coskakashi.jpeg" alt="Kakashi Hatake Cosplay">', likes: 98 },
-                    { name: "Sakura Haruno", coser: "@kooriii_", img: '<img src="Images/cossakura.jpeg" alt="Sakura Haruno Cosplay">', likes: 87 },
-                    { name: "Itachi Uchiha", coser: "@_hakkencoser_", img: '<img src="Images/cositachi.jpeg" alt="Itachi Uchiha Cosplay">', likes: 210 },
-                    { name: "Hinata Hyuga", coser: "@fxhxnnie", img: '<img src="Images/coshinata.jpeg" alt="Hinata Hyuga Cosplay">', likes: 134 }
+                    { name: "Naruto Uzumaki", coser: "@shark_rush", img: '<img src="images/cosnaruto.jpeg" alt="Naruto Uzumaki Cosplay">', likes: 156 },
+                    { name: "Sasuke Uchiha", coser: "@mohanad_ismael21", img: '<img src="images/cossasuke.jpeg" alt="Sasuke Uchiha Cosplay">', likes: 142 },
+                    { name: "Kakashi Hatake", coser: "@lucretius_mooka", img: '<img src="images/coskakashi.jpeg" alt="Kakashi Hatake Cosplay">', likes: 98 },
+                    { name: "Sakura Haruno", coser: "@kooriii_", img: '<img src="images/cossakura.jpeg" alt="Sakura Haruno Cosplay">', likes: 87 },
+                    { name: "Itachi Uchiha", coser: "@_hakkencoser_", img: '<img src="images/cositachi.jpeg" alt="Itachi Uchiha Cosplay">', likes: 210 },
+                    { name: "Hinata Hyuga", coser: "@fxhxnnie", img: '<img src="images/coshinata.jpeg" alt="Hinata Hyuga Cosplay">', likes: 134 }
                 ]
             },
             {
@@ -483,11 +483,11 @@
                 coverImg: '<img src="images/demonslayer.jpeg" alt="Demon Slayer Series Cover">',
                 description: "The breathtaking world of Demon Slayer with amazing cosplays of Tanjiro, Nezuko, and Hashiras.",
                 characters: [
-                    { name: "Tanjiro Kamado", coser: "@akemikuncosplay", img: '<img src="Images/costanjiro.jpeg" alt="Tanjiro Kamado Cosplay">', likes: 189 },
-                    { name: "Nezuko Kamado", coser: "@moe.cosplay_", img: '<img src="Images/cosnezuko.jpeg" alt="Nezuko Kamado Cosplay">', likes: 245 },
-                    { name: "Zenitsu Agatsuma", coser: "@layzeelolita", img: '<img src="Images/coszenitsu.jpeg" alt="Zenitsu Agatsuma Cosplay">', likes: 112 },
-                    { name: "Inosuke Hashibira", coser: "@taryn_cosplay", img: '<img src="Images/cosinosuke.jpeg" alt="Inosuke Hashibira Cosplay">', likes: 103 },
-                    { name: "Rengoku Kyojuro", coser: "@kevintwindicha", img: '<img src="Images/cosrengoku.jpeg" alt="Rengoku Kyojuro Cosplay">', likes: 167 }
+                    { name: "Tanjiro Kamado", coser: "@akemikuncosplay", img: '<img src="images/costanjiro.jpeg" alt="Tanjiro Kamado Cosplay">', likes: 189 },
+                    { name: "Nezuko Kamado", coser: "@moe.cosplay_", img: '<img src="images/cosnezuko.jpeg" alt="Nezuko Kamado Cosplay">', likes: 245 },
+                    { name: "Zenitsu Agatsuma", coser: "@layzeelolita", img: '<img src="images/coszenitsu.jpeg" alt="Zenitsu Agatsuma Cosplay">', likes: 112 },
+                    { name: "Inosuke Hashibira", coser: "@taryn_cosplay", img: '<img src="images/cosinosuke.jpeg" alt="Inosuke Hashibira Cosplay">', likes: 103 },
+                    { name: "Rengoku Kyojuro", coser: "@kevintwindicha", img: '<img src="images/cosrengoku.jpeg" alt="Rengoku Kyojuro Cosplay">', likes: 167 }
                 ]
             },
             {
@@ -600,7 +600,7 @@
             return comments[key] || [];
         }
 
-        function getImageSrc(imgHtml) {
+        function getimagesrc(imgHtml) {
             const match = imgHtml.match(/src="([^"]+)"/);
             return match ? match[1] : "https://via.placeholder.com/400x300?text=No+Image";
         }
@@ -642,7 +642,7 @@
             container.empty();
             seriesData.forEach(serie => {
                 let totalLikes = serie.characters.reduce((sum, ch) => sum + ch.likes, 0);
-                const coverSrc = getImageSrc(serie.coverImg);
+                const coverSrc = getimagesrc(serie.coverImg);
                 const coverAlt = getImageAlt(serie.coverImg);
                 const card = `
                 <div class="col-md-6 col-lg-3">
@@ -689,7 +689,7 @@
                               <div class="character-grid" id="modalCharGrid">`;
 
             serie.characters.forEach((char, idx) => {
-                const charImgSrc = getImageSrc(char.img);
+                const charImgSrc = getimagesrc(char.img);
                 const charImgAlt = getImageAlt(char.img);
                 const charComments = getCommentsForCharacter(serie.id, char.name);
                 
