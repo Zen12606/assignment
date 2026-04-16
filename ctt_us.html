@@ -19,30 +19,30 @@
         }
 
         .top-nav {
-                max-width: 1400px;
-                margin: 0 auto 30px auto;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding-bottom: 15px;
-                border-bottom: 2px solid #000000;
-            }
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #000000;
+        }
 
-            .main-title-link {
-                text-decoration: none;
-                color: #ffff;
-            }
+        .main-title-link {
+            text-decoration: none;
+            color: #ffff;
+        }
 
-            .nav-links {
-                display: flex;
-                gap: 15px;
-            }
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
 
-            .main-title {
-                font-size: 2rem;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                margin: 0;
-            }
+        .main-title {
+            font-size: 2rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+        }
 
         label {
             color: white;
@@ -72,22 +72,40 @@
         }
 
         .nav-btn {
-                text-decoration: none;
-                color: #333;
-                background-color: #fff;
-                padding: 8px 20px;
-                border-radius: 20px;
-                font-size: 14px;
-                font-weight: bold;
-                transition: all 0.3s ease;
-                border: 1px solid transparent;
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
             }
 
-            .nav-btn:hover {
-                background-color: #000;
-                color: #fff;
-                transform: translateY(-2px);
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                margin: 5px 2px;
+            }
+        }
     </style>
 </head>
 
@@ -98,7 +116,7 @@
 
         <a href="Index.html" class="main-title-link">
             <h1 class="main-title"><strong>Cosnime</strong></h1>
-        </a>s
+        </a>
 
         <nav class="nav-links">
             <a href="Index.html" class="nav-btn">Home</a>
@@ -109,6 +127,7 @@
             <a href="event-calendar.html" class="nav-btn">Event Calender</a>
             <a href="AboutUs.html" class="nav-btn">About Us</a>
             <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+            <a href="anime-quotes.html" class="nav-btn">Anime Quote</a>
         </nav>
 
     </div>

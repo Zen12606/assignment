@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Cosplay Gallery | Cosnime</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: #fef9f5;
+            color: #1e1e2a;
+            scroll-behavior: smooth;
+        }
+
+        .top-nav {
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        .main-title-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .gallery-header {
+            position: relative;
+            background-image: url('Images/CosplayGallery.webp');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: scroll;
+            padding: 5rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .gallery-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .gallery-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-title {
+            font-weight: 800;
+            font-size: 3.2rem;
+            color: #ffffff;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-sub {
+            color: #ffebc2;
+            font-weight: 500;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .storage-badge {
+            background: rgba(30, 42, 62, 0.9);
+            backdrop-filter: blur(5px);
+            color: #ffcd94;
+            border-radius: 30px;
+            padding: 8px 18px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 200, 100, 0.5);
+        }
+
+        .cos-card {
+            border: none;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            background: white;
+            cursor: pointer;
+        }
+
+        .cos-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 36px rgba(0, 0, 0, 0.15);
+        }
+
+        .cos-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .cos-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .cos-character {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #1f2b48;
+        }
+
+        .cos-anime {
+            color: #ff6f61;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .btn-like {
+            background: #ffe8e0;
+            border: none;
+            border-radius: 40px;
+            padding: 5px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .btn-like i {
+            color: #ff6b6b;
+            margin-right: 5px;
+        }
+
+        .like-count {
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .char-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .char-card:hover {
+            transform: scale(1.02);
+            background: #fff0e6;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .char-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .char-card img:hover {
+            transform: scale(1.02);
+        }
+
+        .char-name {
+            font-weight: 700;
+            margin-top: 12px;
+            font-size: 1.1rem;
+            color: #1f2b48;
+        }
+
+        .char-coser {
+            font-size: 0.85rem;
+            color: #ff6f61;
+            margin-top: 4px;
+        }
+
+        .comment-section {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #e9ecef;
+            text-align: left;
+        }
+
+        .comment-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+
+        .comment-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+            background: #fff;
+            padding: 8px 10px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+
+        .comment-input-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .comment-input:focus {
+            border-color: #ff6b6b;
+        }
+
+        .comment-btn {
+            background: #ff6b6b;
+            border: none;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            color: white;
+            transition: 0.2s;
+        }
+
+        .comment-btn:hover {
+            background: #ff4757;
+        }
+
+        .modal-header.bg-serie {
+            background: linear-gradient(90deg, #1a1a2e, #2c3e66);
+            color: white;
+        }
+
+        .btn-like-modal {
+            background: #ff6b6b;
+            border: none;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            color: white;
+            transition: 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-like-modal:hover {
+            background: #ff4757;
+            transform: scale(1.05);
+        }
+
+        .custom-image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .custom-image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #111927;
+            color: #bbb;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-title {
+                font-size: 2rem;
+            }
+
+            .cos-card img {
+                height: 250px;
+            }
+
+            .gallery-header {
+                padding: 3rem 0;
+            }
+
+            .character-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .char-card img {
+                height: 160px;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                margin: 5px 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Updated Navbar matching index.html style -->
+    <div class="top-nav">
+        <a href="Index.html" class="main-title-link">
+            <h1 class="main-title"><strong>Cosnime</strong></h1>
+        </a>
+        <nav class="nav-links">
+            <a href="Index.html" class="nav-btn">Home</a>
+            <a href="AnimeNews.html" class="nav-btn">Anime News</a>
+            <a href="anime-recommend.html" class="nav-btn">Anime Recommendation</a>
+            <a href="Cos_news.html" class="nav-btn">Cosplay News</a>
+            <a href="cosplay-gallery.html" class="nav-btn">Cosplay Gallery</a>
+            <a href="event-calendar.html" class="nav-btn">Event Calender</a>
+            <a href="AboutUs.html" class="nav-btn">About Us</a>
+            <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+            <a href="anime-quotes.html" class="nav-btn">Anime Quote</a>
+        </nav>
+    </div>
+
+    <div class="gallery-header">
+        <div class="container">
+            <h1 class="gallery-title"><i class="fas fa-camera-retro me-2"></i> Cosplay Gallery</h1>
+            <p class="gallery-sub">✨ Click on any anime card to explore ALL cosplays from that series! ✨</p>
+            <div class="mt-3">
+                <span class="storage-badge"><i class="fas fa-database"></i> localStorage stores your likes & comments</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-4">
+        <div class="row g-4" id="galleryContainer"></div>
+        <div class="text-center mt-5">
+            <button id="resetLikesBtn" class="btn btn-outline-secondary rounded-pill px-4"><i
+                    class="fas fa-sync-alt me-2"></i>Reset All Likes (Local)</button>
+            <p class="text-muted small mt-3"><i class="fas fa-info-circle"></i> Click any image to enlarge! Your likes and comments are saved in localStorage.</p>
+        </div>
+    </div>
+
+    <div class="modal fade" id="seriesModal" tabindex="-1" aria-labelledby="seriesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-serie">
+                    <h5 class="modal-title" id="seriesModalLabel"><i class="fas fa-users me-2"></i>Cosplay Collection
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBodyContent">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status"></div> Loading...
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imageModal" class="custom-image-modal" onclick="closeImageModal()">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Enlarged Cosplay">
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Cosnime | Anime & Cosplay Community</p>
+            <p><i class="fab fa-instagram"></i> <i class="fab fa-twitter"></i> <i class="fab fa-facebook"></i> Follow us
+                for latest updates</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Keep all your existing gallery JavaScript exactly as it was
+        const seriesData = [
+            {
+                id: 1,
+                name: "Naruto",
+                animeTitle: "Naruto / Naruto Shippuden",
+                coverImg: '<img src="Images/naruto.jpeg" alt="Naruto Series Cover">',
+                description: "The legendary ninja world featuring iconic characters like Naruto, Sasuke, Kakashi, and more!",
+                characters: [
+                    { name: "Naruto Uzumaki", coser: "@shark_rush", img: '<img src="Images/cosnaruto.jpeg" alt="Naruto Uzumaki Cosplay">', likes: 156 },
+                    { name: "Sasuke Uchiha", coser: "@mohanad_ismael21", img: '<img src="Images/cossasuke.jpeg" alt="Sasuke Uchiha Cosplay">', likes: 142 },
+                    { name: "Kakashi Hatake", coser: "@lucretius_mooka", img: '<img src="Images/coskakashi.jpeg" alt="Kakashi Hatake Cosplay">', likes: 98 },
+                    { name: "Sakura Haruno", coser: "@kooriii_", img: '<img src="Images/cossakura.jpeg" alt="Sakura Haruno Cosplay">', likes: 87 },
+                    { name: "Itachi Uchiha", coser: "@_hakkencoser_", img: '<img src="Images/cositachi.jpeg" alt="Itachi Uchiha Cosplay">', likes: 210 },
+                    { name: "Hinata Hyuga", coser: "@fxhxnnie", img: '<img src="Images/coshinata.jpeg" alt="Hinata Hyuga Cosplay">', likes: 134 }
+                ]
+            },
+            {
+                id: 2,
+                name: "Demon Slayer",
+                animeTitle: "Demon Slayer: Kimetsu no Yaiba",
+                coverImg: '<img src="images/demonslayer.jpeg" alt="Demon Slayer Series Cover">',
+                description: "The breathtaking world of Demon Slayer with amazing cosplays of Tanjiro, Nezuko, and Hashiras.",
+                characters: [
+                    { name: "Tanjiro Kamado", coser: "@akemikuncosplay", img: '<img src="Images/costanjiro.jpeg" alt="Tanjiro Kamado Cosplay">', likes: 189 },
+                    { name: "Nezuko Kamado", coser: "@moe.cosplay_", img: '<img src="Images/cosnezuko.jpeg" alt="Nezuko Kamado Cosplay">', likes: 245 },
+                    { name: "Zenitsu Agatsuma", coser: "@layzeelolita", img: '<img src="Images/coszenitsu.jpeg" alt="Zenitsu Agatsuma Cosplay">', likes: 112 },
+                    { name: "Inosuke Hashibira", coser: "@taryn_cosplay", img: '<img src="Images/cosinosuke.jpeg" alt="Inosuke Hashibira Cosplay">', likes: 103 },
+                    { name: "Rengoku Kyojuro", coser: "@kevintwindicha", img: '<img src="Images/cosrengoku.jpeg" alt="Rengoku Kyojuro Cosplay">', likes: 167 }
+                ]
+            },
+            {
+                id: 3,
+                name: "Fate",
+                animeTitle: "Fate Series (Fate/Stay Night, FGO)",
+                coverImg: '<img src="images/fate.jpeg" alt="Fate Series Cover">',
+                description: "Epic Holy Grail War heroes and heroines brought to life by talented cosplayers.",
+                characters: [
+                    { name: "Artoria Pendragon", coser: "@erineberries", img: '<img src="images/cosartoria.jpeg" alt="Artoria Pendragon Cosplay">', likes: 278 },
+                    { name: "Emiya Shirou", coser: "@silverkaze", img: '<img src="images/cosshirou.jpeg" alt="Emiya Shirou Cosplay">', likes: 89 },
+                    { name: "Rin Tohsaka", coser: "@abiaikou", img: '<img src="images/cosrin.jpeg" alt="Rin Tohsaka Cosplay">', likes: 156 },
+                    { name: "Gilgamesh", coser: "@thereisfaizal", img: '<img src="images/cosgilgamesh.jpeg" alt="Gilgamesh Cosplay">', likes: 134 },
+                    { name: "Mash Kyrielight", coser: "@miyurine.cos", img: '<img src="images/coskyrielight.jpeg" alt="Mash Kyrielight Cosplay">', likes: 145 }
+                ]
+            },
+            {
+                id: 4,
+                name: "Genshin Impact",
+                animeTitle: "Genshin Impact",
+                coverImg: '<img src="images/genshinimpact.jpeg" alt="Genshin Impact Series Cover">',
+                description: "Teyvat's beloved characters from the hit game - stunning cosplays.",
+                characters: [
+                    { name: "Hu Tao", coser: "@Koufiie(Hoyolab)", img: '<img src="images/coshutao.webp" alt="Hu Tao Cosplay">', likes: 312 },
+                    { name: "Zhongli", coser: "@I_need_Phainon(Hoyolab)", img: '<img src="images/coszhongli.webp" alt="Zhongli Cosplay">', likes: 198 },
+                    { name: "Raiden Shogun", coser: "@DailyDoseOfCosplay(Hoyolab)", img: '<img src="images/cosraidenshogun.jpg" alt="Raiden Shogun Cosplay">', likes: 267 },
+                    { name: "Venti", coser: "@XionLu(Hoyolab)", img: '<img src="images/cosventi.webp" alt="Venti Cosplay">', likes: 143 },
+                    { name: "Ganyu", coser: "@Dэм(Hoyolab)", img: '<img src="images/cosganyu.webp" alt="Ganyu Cosplay">', likes: 189 }
+                ]
+            },
+            {
+                id: 5,
+                name: "Evangelion",
+                animeTitle: "Neon Genesis Evangelion",
+                coverImg: '<img src="images/evangelion.jpeg" alt="Evangelion Series Cover">',
+                description: "Iconic mecha anime with deep psychological themes and amazing cosplays.",
+                characters: [
+                    { name: "Asuka Langley", coser: "@sarah.tonin99", img: '<img src="images/cosasuka.jpeg" alt="Asuka Langley Cosplay">', likes: 203 },
+                    { name: "Rei Ayanami", coser: "@awiesome", img: '<img src="images/cosrei.jpeg" alt="Rei Ayanami Cosplay">', likes: 187 },
+                    { name: "Shinji Ikari", coser: "@the_imperial_cosplay", img: '<img src="images/cosshinji.jpeg" alt="Shinji Ikari Cosplay">', likes: 76 },
+                    { name: "Kaworu Nagisa", coser: "@_nekology", img: '<img src="images/coskaworu.jpeg" alt="Kaworu Nagisa Cosplay">', likes: 112 }
+                ]
+            },
+            {
+                id: 6,
+                name: "Jujutsu Kaisen",
+                animeTitle: "Jujutsu Kaisen",
+                coverImg: '<img src="images/jujutsukaisen.jpeg" alt="Jujutsu Kaisen Series Cover">',
+                description: "Modern sorcery battles featuring Gojo, Yuji, and the Jujutsu crew.",
+                characters: [
+                    { name: "Gojo Satoru", coser: "@zackt._", img: '<img src="images/cosgojo.jpeg" alt="Gojo Satoru Cosplay">', likes: 354 },
+                    { name: "Yuji Itadori", coser: "@yuekelele", img: '<img src="images/cosyuji.jpeg" alt="Yuji Itadori Cosplay">', likes: 176 },
+                    { name: "Megumi Fushiguro", coser: "@_atsucos_", img: '<img src="images/cosmegumi.jpeg" alt="Megumi Fushiguro Cosplay">', likes: 134 },
+                    { name: "Nobara Kugisaki", coser: "@sha.sheru", img: '<img src="images/cosnobara.jpeg" alt="Nobara Kugisaki Cosplay">', likes: 145 },
+                    { name: "Sukuna", coser: "@theprincedeguzman", img: '<img src="images/cossukana.jpeg" alt="Sukuna Cosplay">', likes: 198 }
+                ]
+            },
+            {
+                id: 7,
+                name: "One Piece",
+                animeTitle: "One Piece",
+                coverImg: '<img src="images/onepiece.jpeg" alt="One Piece Series Cover">',
+                description: "The Grand Line adventure with the Straw Hat Pirates and legendary characters.",
+                characters: [
+                    { name: "Monkey D. Luffy", coser: "@vaeshawn", img: '<img src="images/cosluffy.jpeg" alt="Monkey D. Luffy Cosplay">', likes: 267 },
+                    { name: "Roronoa Zoro", coser: "@theprincedeguzman", img: '<img src="images/coszoro.jpeg" alt="Roronoa Zoro Cosplay">', likes: 223 },
+                    { name: "Nami", coser: "@r.efeen", img: '<img src="images/cosnami.jpeg" alt="Nami Cosplay">', likes: 167 },
+                    { name: "Sanji", coser: "@locam0tive", img: '<img src="images/cossanji.jpeg" alt="Sanji Cosplay">', likes: 134 },
+                    { name: "Yamato", coser: "@LaRochefort(Hoyolab)", img: '<img src="images/cosyamato.webp" alt="Yamato Cosplay">', likes: 189 }
+                ]
+            },
+            {
+                id: 8,
+                name: "Cyberpunk",
+                animeTitle: "Cyberpunk: Edgerunners",
+                coverImg: '<img src="images/cyberpunkedgerunners.jpeg" alt="Cyberpunk Series Cover">',
+                description: "Neon-drenched Night City with David, Lucy, and the Edgerunners crew.",
+                characters: [
+                    { name: "Lucy", coser: "@melonpan_cos", img: '<img src="images/coslucy.jpeg" alt="Lucy Cosplay">', likes: 298 },
+                    { name: "David Martinez", coser: "@jackbotnik", img: '<img src="images/cosdavid.jpeg" alt="David Martinez Cosplay">', likes: 187 },
+                    { name: "Rebecca", coser: "@rretrorebel", img: '<img src="images/cosrebecca.jpeg" alt="Rebecca Cosplay">', likes: 165 },
+                    { name: "Maine", coser: "@blackcosplayboosters", img: '<img src="images/cosmaine.jpeg" alt="Maine Cosplay">', likes: 98 }
+                ]
+            }
+        ];
+
+        const STORAGE_KEY = "cosplay_gallery_likes_series";
+        const COMMENTS_KEY = "cosplay_gallery_comments";
+
+        function loadCommentsFromStorage() {
+            const stored = localStorage.getItem(COMMENTS_KEY);
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        function saveCommentToStorage(serieId, charName, comment) {
+            let comments = loadCommentsFromStorage();
+            const key = `${serieId}_${charName}`;
+            if (!comments[key]) comments[key] = [];
+            comments[key].push({
+                text: comment,
+                timestamp: new Date().toLocaleString(),
+                id: Date.now()
+            });
+            localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
+        }
+
+        function getCommentsForCharacter(serieId, charName) {
+            const comments = loadCommentsFromStorage();
+            const key = `${serieId}_${charName}`;
+            return comments[key] || [];
+        }
+
+        function getImageSrc(imgHtml) {
+            const match = imgHtml.match(/src="([^"]+)"/);
+            return match ? match[1] : "https://via.placeholder.com/400x300?text=No+Image";
+        }
+
+        function getImageAlt(imgHtml) {
+            const match = imgHtml.match(/alt="([^"]+)"/);
+            return match ? match[1] : "Cosplay Image";
+        }
+
+        function loadLikesFromStorage() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                const likesMap = JSON.parse(stored);
+                for (let serie of seriesData) {
+                    for (let char of serie.characters) {
+                        let key = `${serie.id}_${char.name}`;
+                        if (likesMap[key] !== undefined) {
+                            char.likes = likesMap[key];
+                        }
+                    }
+                }
+            }
+        }
+
+        function saveAllLikesToStorage() {
+            const likesObj = {};
+            for (let serie of seriesData) {
+                for (let char of serie.characters) {
+                    let key = `${serie.id}_${char.name}`;
+                    likesObj[key] = char.likes;
+                }
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(likesObj));
+            sessionStorage.setItem("lastGalleryUpdate", new Date().toISOString());
+        }
+
+        function renderMainGallery() {
+            const container = $("#galleryContainer");
+            container.empty();
+            seriesData.forEach(serie => {
+                let totalLikes = serie.characters.reduce((sum, ch) => sum + ch.likes, 0);
+                const coverSrc = getImageSrc(serie.coverImg);
+                const coverAlt = getImageAlt(serie.coverImg);
+                const card = `
+                <div class="col-md-6 col-lg-3">
+                    <div class="card cos-card" data-serie-id="${serie.id}">
+                        <img src="${coverSrc}" class="card-img-top" alt="${coverAlt}">
+                        <div class="card-body">
+                            <h5 class="cos-character">${serie.name}</h5>
+                            <p class="cos-anime"><i class="fas fa-tv"></i> ${serie.animeTitle}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span class="badge bg-warning text-dark"><i class="fas fa-heart"></i> ${totalLikes} total likes</span>
+                                <small class="text-muted"><i class="fas fa-users"></i> ${serie.characters.length} characters</small>
+                            </div>
+                            <p class="small text-muted mt-2">${serie.description.substring(0, 60)}...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+                container.append(card);
+            });
+
+            $(".cos-card").off("click").on("click", function (e) {
+                const serieId = $(this).data("serie-id");
+                const serie = seriesData.find(s => s.id === serieId);
+                if (serie) {
+                    openSeriesModal(serie);
+                }
+            });
+        }
+
+        function openImageModal(imgSrc, imgAlt) {
+            $("#modalImage").attr("src", imgSrc);
+            $("#modalImage").attr("alt", imgAlt);
+            $("#imageModal").css("display", "flex");
+        }
+
+        function closeImageModal() {
+            $("#imageModal").css("display", "none");
+        }
+
+        function openSeriesModal(serie) {
+            const modalBody = $("#modalBodyContent");
+            let charactersHtml = `<h4><i class="fas fa-film"></i> ${serie.animeTitle}</h4>
+                              <p>${serie.description}</p>
+                              <div class="character-grid" id="modalCharGrid">`;
+
+            serie.characters.forEach((char, idx) => {
+                const charImgSrc = getImageSrc(char.img);
+                const charImgAlt = getImageAlt(char.img);
+                const charComments = getCommentsForCharacter(serie.id, char.name);
+                
+                let commentsHtml = '';
+                charComments.forEach(comment => {
+                    commentsHtml += `<div class="comment-text"><i class="fas fa-comment-dots me-1"></i> ${escapeHtml(comment.text)} <small class="text-muted" style="font-size: 0.65rem;">(${comment.timestamp})</small></div>`;
+                });
+                
+                charactersHtml += `
+                <div class="char-card" data-char-index="${idx}" data-serie-id="${serie.id}" data-char-name="${char.name}">
+                    <img src="${charImgSrc}" alt="${charImgAlt}" class="char-img-clickable" style="cursor: pointer;" data-img-src="${charImgSrc}" data-img-alt="${charImgAlt}">
+                    <div class="char-name">${char.name}</div>
+                    <div class="char-coser"><i class="fas fa-user-circle"></i> ${char.coser}</div>
+                    <div class="mt-2">
+                        <button class="btn-like-modal btn-sm btn-like-char" data-serie-id="${serie.id}" data-char-name="${char.name}">
+                            <i class="fas fa-heart"></i> Like <span class="like-count-modal" id="likeCountModal_${serie.id}_${char.name.replace(/\s/g, '')}">${char.likes}</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <div class="comment-title"><i class="fas fa-comments"></i> Comments & Reviews</div>
+                        <div id="comments-container-${serie.id}_${char.name.replace(/\s/g, '')}">
+                            ${commentsHtml || '<div class="comment-text text-muted">No comments yet. Be the first to review!</div>'}
+                        </div>
+                        <div class="comment-input-group">
+                            <input type="text" class="comment-input" id="commentInput_${serie.id}_${char.name.replace(/\s/g, '')}" placeholder="Write a review or comment...">
+                            <button class="comment-btn add-comment-btn" data-serie-id="${serie.id}" data-char-name="${char.name}">Post</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            });
+            charactersHtml += `</div><p class="text-muted small mt-3"><i class="fas fa-info-circle"></i> Click any image to enlarge! Your likes and comments are saved in localStorage.</p>`;
+            modalBody.html(charactersHtml);
+
+            $(".char-img-clickable").off("click").on("click", function(e) {
+                e.stopPropagation();
+                const imgSrc = $(this).data("img-src");
+                const imgAlt = $(this).data("img-alt");
+                openImageModal(imgSrc, imgAlt);
+            });
+
+            $(".btn-like-char").off("click").on("click", function (e) {
+                e.stopPropagation();
+                const serieId = parseInt($(this).data("serie-id"));
+                const charName = $(this).data("char-name");
+                const targetSerie = seriesData.find(s => s.id === serieId);
+                if (targetSerie) {
+                    const targetChar = targetSerie.characters.find(c => c.name === charName);
+                    if (targetChar) {
+                        targetChar.likes += 1;
+                        $(`#likeCountModal_${serieId}_${charName.replace(/\s/g, '')}`).text(targetChar.likes);
+                        saveAllLikesToStorage();
+                        $(this).css("transform", "scale(1.1)");
+                        setTimeout(() => $(this).css("transform", ""), 200);
+                    }
+                }
+            });
+
+            $(".add-comment-btn").off("click").on("click", function(e) {
+                e.stopPropagation();
+                const serieId = parseInt($(this).data("serie-id"));
+                const charName = $(this).data("char-name");
+                const inputId = `#commentInput_${serieId}_${charName.replace(/\s/g, '')}`;
+                const commentText = $(inputId).val().trim();
+                
+                if (commentText === "") {
+                    alert("Please enter a comment!");
+                    return;
+                }
+                
+                saveCommentToStorage(serieId, charName, commentText);
+                $(inputId).val("");
+                
+                const targetSerie = seriesData.find(s => s.id === serieId);
+                if (targetSerie) {
+                    const targetChar = targetSerie.characters.find(c => c.name === charName);
+                    if (targetChar) {
+                        const updatedComments = getCommentsForCharacter(serieId, charName);
+                        let commentsHtml = '';
+                        updatedComments.forEach(comment => {
+                            commentsHtml += `<div class="comment-text"><i class="fas fa-comment-dots me-1"></i> ${escapeHtml(comment.text)} <small class="text-muted" style="font-size: 0.65rem;">(${comment.timestamp})</small></div>`;
+                        });
+                        $(`#comments-container-${serieId}_${charName.replace(/\s/g, '')}`).html(commentsHtml);
+                    }
+                }
+            });
+
+            const modal = new bootstrap.Modal(document.getElementById('seriesModal'));
+            modal.show();
+
+            sessionStorage.setItem("lastOpenedSeries", JSON.stringify({ name: serie.name, time: new Date().toLocaleString() }));
+        }
+
+        function escapeHtml(text) {
+            if (!text) return "";
+            return text.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        function resetAllLikes() {
+            const originalLikesMap = {
+                "1_Naruto Uzumaki": 156, "1_Sasuke Uchiha": 142, "1_Kakashi Hatake": 98, "1_Sakura Haruno": 87, "1_Itachi Uchiha": 210, "1_Hinata Hyuga": 134,
+                "2_Tanjiro Kamado": 189, "2_Nezuko Kamado": 245, "2_Zenitsu Agatsuma": 112, "2_Inosuke Hashibira": 103, "2_Rengoku Kyojuro": 167,
+                "3_Artoria Pendragon": 278, "3_Emiya Shirou": 89, "3_Rin Tohsaka": 156, "3_Gilgamesh": 134, "3_Mash Kyrielight": 145,
+                "4_Hu Tao": 312, "4_Zhongli": 198, "4_Raiden Shogun": 267, "4_Venti": 143, "4_Ganyu": 189,
+                "5_Asuka Langley": 203, "5_Rei Ayanami": 187, "5_Shinji Ikari": 76, "5_Kaworu Nagisa": 112,
+                "6_Gojo Satoru": 354, "6_Yuji Itadori": 176, "6_Megumi Fushiguro": 134, "6_Nobara Kugisaki": 145, "6_Sukuna": 198,
+                "7_Monkey D. Luffy": 267, "7_Roronoa Zoro": 223, "7_Nami": 167, "7_Sanji": 134, "7_Yamato": 189,
+                "8_Lucy": 298, "8_David Martinez": 187, "8_Rebecca": 165, "8_Maine": 98
+            };
+
+            for (let serie of seriesData) {
+                for (let char of serie.characters) {
+                    let key = `${serie.id}_${char.name}`;
+                    if (originalLikesMap[key] !== undefined) {
+                        char.likes = originalLikesMap[key];
+                    }
+                }
+            }
+            saveAllLikesToStorage();
+            renderMainGallery();
+            alert("All likes have been reset to original values!");
+        }
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+            }
+            return null;
+        }
+
+        $(document).ready(function() {
+            $("#imageModal").click(function(e) {
+                if (e.target === this) {
+                    closeImageModal();
+                }
+            });
+            
+            $(document).keydown(function(e) {
+                if (e.key === "Escape" && $("#imageModal").css("display") === "flex") {
+                    closeImageModal();
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            loadLikesFromStorage();
+            renderMainGallery();
+
+            let visitCount = getCookie("galleryVisitCount");
+            if (!visitCount) setCookie("galleryVisitCount", 1, 7);
+            else setCookie("galleryVisitCount", parseInt(visitCount) + 1, 7);
+
+            if (!sessionStorage.getItem("galleryEnterTime")) {
+                sessionStorage.setItem("galleryEnterTime", new Date().toLocaleTimeString());
+            }
+
+            $("#resetLikesBtn").on("click", function () {
+                if (confirm("Reset ALL likes for every character across all series?")) {
+                    resetAllLikes();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

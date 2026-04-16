@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anime Quotes</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url("Images/Anime\ Landscape.jpg");
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        /* NAVBAR */
+        .top-nav {
+            max-width: 1400px;
+            margin: 0 auto 40px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 2px solid #000;
+        }
+
+        .main-title-link {
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* CONTENT */
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .quote {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        .anime {
+            color: #38bdf8;
+        }
+
+        .character {
+            color: #facc15;
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                margin: 5px 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="top-nav">
+
+        <a href="Index.html" class="main-title-link">
+            <h1><strong>Cosnime</strong></h1>
+        </a>
+
+        <nav class="nav-links">
+            <a href="Index.html" class="nav-btn">Home</a>
+            <a href="AnimeNews.html" class="nav-btn">Anime News</a>
+            <a href="anime-recommend.html" class="nav-btn">Anime Recommendation</a>
+            <a href="Cos_news.html" class="nav-btn">Cosplay News</a>
+            <a href="cosplay-gallery.html" class="nav-btn">Cosplay Gallery</a>
+            <a href="event-calendar.html" class="nav-btn">Event Calendar</a>
+            <a href="AboutUs.html" class="nav-btn">About Us</a>
+            <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+            <a href="anime-quotes.html" class="nav-btn">Anime Quote</a>
+        </nav>
+
+    </div>
+
+    <div class="container">
+        <div class="container-box">
+
+            <h1>Anime Quotes Generator</h1>
+            <p>Click the button to get a random anime quote</p>
+
+            <div id="quoteBox">
+                <p class="quote">Click below to load quote...</p>
+            </div>
+
+            <button class="btn btn-primary mt-3" onclick="getQuote()">Get Quote</button>
+
+        </div>
+    </div>
+
+    <script>
+        function getQuote() {
+
+            $("#quoteBox").html("<p>Loading...</p>");
+
+            $.ajax({
+                url: "https://api.animechan.io/v1/quotes/random",
+                method: "GET",
+
+                success: function (response) {
+
+                    let quote = response.data.content;
+                    let anime = response.data.anime.name;
+                    let character = response.data.character.name;
+
+                    let html = `
+                        <p class="quote">"${quote}"</p>
+                        <p class="anime">Anime: ${anime}</p>
+                        <p class="character">Character: ${character}</p>
+                    `;
+
+                    $("#quoteBox").html(html);
+                },
+
+                error: function () {
+                    $("#quoteBox").html("<p>Failed to load quote. Try again.</p>");
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

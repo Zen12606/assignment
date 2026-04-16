@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Event Calendar | Cosnime</title>
+    <!-- Bootstrap 5 CSS + Icons + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- FullCalendar CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: lightblue;
+            color: #1a2a3a;
+        }
+
+        .top-nav {
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        .main-title-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Calendar Header */
+        .calendar-header {
+            background: linear-gradient(lightgreen);
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 2rem;
+        }
+
+        /* View Toggle Buttons */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .view-btn {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            background: #e9ecef;
+            color: #495057;
+            transition: all 0.3s;
+        }
+
+        .view-btn.active {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Calendar Container */
+        .calendar-container {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        /* Event Detail Modal & Custom Event Form */
+        .event-detail-card {
+            padding: 15px;
+            border-left: 5px solid #ff6b6b;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .event-location {
+            color: #ff6b6b;
+            font-weight: 500;
+        }
+
+        .custom-event-form {
+            background: white;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+
+        .pin-icon {
+            color: #ff4757;
+            margin-right: 5px;
+        }
+
+        .region-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .region-sea {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .region-asia {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .region-japan {
+            background: #ffe0e0;
+            color: #c62828;
+        }
+
+        .region-global {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .view-btn {
+                padding: 6px 20px;
+                font-size: 0.8rem;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                margin: 5px 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-nav">
+
+        <a href="Index.html" class="main-title-link">
+            <h1 class="main-title"><strong>Cosnime</strong></h1>
+        </a>
+
+        <nav class="nav-links">
+            <a href="Index.html" class="nav-btn">Home</a>
+            <a href="AnimeNews.html" class="nav-btn">Anime News</a>
+            <a href="anime-recommend.html" class="nav-btn">Anime Recommendation</a>
+            <a href="Cos_news.html" class="nav-btn">Cosplay News</a>
+            <a href="cosplay-gallery.html" class="nav-btn">Cosplay Gallery</a>
+            <a href="event-calendar.html" class="nav-btn">Event Calender</a>
+            <a href="AboutUs.html" class="nav-btn">About Us</a>
+            <a href="ctt_us.html" class="nav-btn">Contact Us</a>
+            <a href="anime-quotes.html" class="nav-btn">Anime Quote</a>
+        </nav>
+
+    </div>
+
+    <!-- Calendar Header -->
+    <div class="calendar-header">
+        <div class="container">
+            <h1><i class="fas fa-calendar-alt me-2"></i> Anime & Cosplay Event Calendar 2026</h1>
+            <p>Worldwide conventions, cosplay meets, and anime expos - Click any event for details!</p>
+            <div class="mt-2">
+                <span class="badge bg-dark me-2"><i class="fas fa-database"></i> localStorage: Custom events
+                    saved</span>
+                <span class="badge bg-info"><i class="fas fa-map-marker-alt"></i> Click events to see location &
+                    details</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- View Toggle Buttons -->
+        <div class="view-toggle">
+            <button id="monthViewBtn" class="view-btn active"><i class="fas fa-calendar-month"></i> Month View</button>
+            <button id="weekViewBtn" class="view-btn"><i class="fas fa-calendar-week"></i> Week View</button>
+        </div>
+
+        <!-- Calendar Container -->
+        <div class="calendar-container">
+            <div id="calendar"></div>
+        </div>
+
+        <!-- Custom Event Form -->
+        <div class="custom-event-form">
+            <h4><i class="fas fa-plus-circle me-2"></i>Add Custom Event (Saved to localStorage)</h4>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <input type="text" id="customEventName" class="form-control" placeholder="Event Name">
+                </div>
+                <div class="col-md-2">
+                    <input type="date" id="customEventDate" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="customEventLocation" class="form-control" placeholder="Location / Venue">
+                </div>
+                <div class="col-md-3">
+                    <textarea id="customEventDesc" class="form-control" rows="1"
+                        placeholder="Description (optional)"></textarea>
+                </div>
+                <div class="col-md-2">
+                    <button id="addCustomEventBtn" class="btn btn-primary w-100"><i class="fas fa-save"></i> Add
+                        Event</button>
+                </div>
+            </div>
+            <div class="mt-2">
+                <small class="text-muted"><i class="fas fa-info-circle"></i> Your custom events are saved in
+                    localStorage and will appear on the calendar with a <i class="fas fa-star"
+                        style="color:#ffc107;"></i> star icon.</small>
+                <button id="resetCustomEventsBtn" class="btn btn-sm btn-outline-danger ms-3"><i
+                        class="fas fa-trash-alt"></i> Clear All Custom Events</button>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="mt-3 d-flex flex-wrap gap-3 justify-content-center">
+            <span><i class="fas fa-map-marker-alt pin-icon"></i> Event with location pin</span>
+            <span><i class="fas fa-star" style="color:#ffc107;"></i> Custom added event</span>
+            <span class="region-badge region-sea">SEA Region</span>
+            <span class="region-badge region-asia">Asia Region</span>
+            <span class="region-badge region-japan">Japan</span>
+            <span class="region-badge region-global">Global/欧美</span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Cosnime | A Place for Anime Lovers</p>
+        </div>
+    </footer>
+
+    <!-- Event Detail Modal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ============================================================
+        // EVENT DATA - All 2026 Anime & Cosplay Events
+        // ============================================================
+
+        const eventsData = [
+            { id: 1, title: "TAGCC 2026 (Malaysia)", start: "2026-04-11", end: "2026-04-12", location: "3 Damansara Mall, Petaling Jaya, Malaysia", region: "SEA", description: "TAGCC Malaysia - Comics, cosplay & gaming convention featuring local and international guests." },
+            { id: 2, title: "Anime Fest!+ 2026", start: "2026-04-18", end: "2026-04-19", location: "Sunway Pyramid Convention Centre (SPCC), Selangor", region: "SEA", description: "Organized by Comic Fiesta team. Doujinshi market, cosplay competition, and special guest meet-and-greet." },
+            { id: 3, title: "ToyCon Summer Prelude (Philippines)", start: "2026-04-11", end: "2026-04-12", location: "Okada Manila, Philippines", region: "SEA", description: "Philippines' premier toy and pop culture convention with cosplay showcases." },
+            { id: 4, title: "Nijigen Expo 2026", start: "2026-05-30", end: "2026-06-01", location: "MITEC, Kuala Lumpur", region: "SEA", description: "10th Anniversary celebration! International guests including Sato Brothers, shuttle bus service provided." },
+            { id: 5, title: "Anime Festival Asia Thailand (AFATH26)", start: "2026-05-30", end: "2026-05-31", location: "QSNCC, Bangkok, Thailand", region: "SEA", description: "HoneyWorks concert, anime showcases, and cosplay events." },
+            { id: 6, title: "ACGHK 2026 (Hong Kong)", start: "2026-05-29", end: "2026-05-31", location: "Hong Kong Convention & Exhibition Centre", region: "ASIA", description: "Hong Kong Animation-Comic-Game Convention - one of Asia's largest ACG events." },
+            { id: 7, title: "DoKomi 2026 (Germany)", start: "2026-05-29", end: "2026-05-31", location: "Düsseldorf, Germany", region: "GLOBAL", description: "Europe's important anime & cosplay gathering." },
+            { id: 8, title: "Fantasy Anime Expo 2", start: "2026-06-20", end: "2026-06-21", location: "Pavilion Bukit Jalil Convention Centre, KL", region: "SEA", description: "Fantasy-themed anime expo with cosplay performances and artist alley." },
+            { id: 9, title: "WCS Malaysia 2026 Asian Invitational", start: "2026-06-28", end: "2026-06-28", location: "Town Hall, Penang", region: "SEA", description: "World Cosplay Summit Malaysia - Top teams from Taiwan, Philippines, Indonesia, Malaysia showcase high-level cosplay stage performances." },
+            { id: 10, title: "Osaka Game & Anime Expo", start: "2026-06-25", end: "2026-06-27", location: "INTEX Osaka, Japan", region: "JAPAN", description: "Osaka's premier game and anime exhibition." },
+            { id: 11, title: "Cosworld Festival 2026", start: "2026-07-03", end: "2026-07-05", location: "Island 88, Penang", region: "SEA", description: "Cosplay festival with competitions and workshops." },
+            { id: 12, title: "Anime Expo (AX) 2026", start: "2026-07-02", end: "2026-07-05", location: "Los Angeles Convention Center, USA", region: "GLOBAL", description: "North America's largest anime convention! Exclusive premieres, fashion shows, and concerts." },
+            { id: 13, title: "Bilibili World (BW) 2026", start: "2026-07-10", end: "2026-07-12", location: "National Exhibition and Convention Center, Shanghai", region: "ASIA", description: "Bilibili's immersive ACGN event with UP主 meetups, cosplay stages, and BML concert." },
+            { id: 14, title: "Japan Expo 2026 (France)", start: "2026-07-09", end: "2026-07-12", location: "Parc des Expositions de Villepinte, Paris", region: "GLOBAL", description: "Europe's largest Japanese culture festival." },
+            { id: 15, title: "ChinaJoy 2026", start: "2026-07-31", end: "2026-08-03", location: "Shanghai New International Expo Centre (SNIEC)", region: "ASIA", description: "China's largest gaming & digital entertainment expo! Cosplay Carnival and Innovation Imaging Zone. Expected 410k+ visitors." },
+            { id: 16, title: "World Cosplay Summit 2026", start: "2026-07-31", end: "2026-08-02", location: "Nagoya, Japan", region: "JAPAN", description: "The global cosplay championship - teams from around the world compete!" },
+            { id: 17, title: "Anime Festival Asia Indonesia (AFAID26)", start: "2026-08-15", end: "2026-08-16", location: "ICE BSD City, Jakarta, Indonesia", region: "SEA", description: "AFA Indonesia - Anime concerts and exhibits." },
+            { id: 18, title: "Comic Market (Comiket) 108", start: "2026-08-15", end: "2026-08-16", location: "Tokyo Big Sight, Japan", region: "JAPAN", description: "World's largest doujinshi fair! The ultimate otaku event." },
+            { id: 19, title: "Kyoto International Manga Anime Fair (Kyo-Maf)", start: "2026-09-20", end: "2026-09-20", location: "Kyoto International Manga Museum, Japan", region: "JAPAN", description: "Kyoto's celebration of manga and anime culture." },
+            { id: 20, title: "MCM Comic Con London (October)", start: "2026-10-23", end: "2026-10-25", location: "ExCeL London, UK", region: "GLOBAL", description: "UK's largest pop culture convention." },
+            { id: 21, title: "Anime Festival Asia Singapore (AFASG26)", start: "2026-11-27", end: "2026-11-29", location: "Suntec Singapore", region: "SEA", description: "Southeast Asia's flagship anime event - concerts, exhibitors, and cosplay." },
+            { id: 22, title: "Dreamland Anime Expo - Xi'an", start: "2026-05-01", end: "2026-05-04", location: "Xi'an, China", region: "ASIA", description: "Dreamland Anime Expo Xi'an Station." },
+            { id: 23, title: "Dreamland Anime Expo - Wuhan", start: "2026-05-01", end: "2026-05-01", location: "Wuhan, China", region: "ASIA", description: "Dreamland Anime Expo Wuhan Station." },
+            { id: 24, title: "Dreamland Anime Expo - Hangzhou", start: "2026-05-02", end: "2026-05-02", location: "Hangzhou, China", region: "ASIA", description: "Dreamland Anime Expo Hangzhou Station." },
+            { id: 25, title: "Dreamland Anime Expo - Chongqing", start: "2026-05-03", end: "2026-05-03", location: "Chongqing, China", region: "ASIA", description: "Dreamland Anime Expo Chongqing Station." },
+            { id: 26, title: "Northern Anime Games Carnival (May)", start: "2026-05-01", end: "2026-05-03", location: "Shenyang New World Expo, China", region: "ASIA", description: "Northern China's anime & gaming carnival." },
+            { id: 27, title: "Northern Anime Games Carnival (July)", start: "2026-07-17", end: "2026-07-19", location: "Shenyang New World Expo, China", region: "ASIA", description: "Summer edition of Northern Anime Games Carnival." },
+            { id: 28, title: "AnimeJapan 2026", start: "2026-03-28", end: "2026-03-29", location: "Tokyo Big Sight, Japan", region: "JAPAN", description: "Japan's largest anime exhibition! Major announcements and new releases." },
+            { id: 29, title: "CICAF 2026 (China Int'l Cartoon & Animation Festival)", start: "2026-04-28", end: "2026-05-03", location: "White Horse Lake Animation Square, Hangzhou, China", region: "ASIA", description: "National-level animation festival featuring 'China Cosplay Super Cup'." }
+        ];
+
+        const CUSTOM_EVENTS_KEY = "calendar_custom_events";
+
+        function loadCustomEvents() {
+            const stored = localStorage.getItem(CUSTOM_EVENTS_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveCustomEvent(event) {
+            let customEvents = loadCustomEvents();
+            event.id = "custom_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6);
+            event.isCustom = true;
+            customEvents.push(event);
+            localStorage.setItem(CUSTOM_EVENTS_KEY, JSON.stringify(customEvents));
+            return event;
+        }
+
+        function deleteAllCustomEvents() {
+            localStorage.removeItem(CUSTOM_EVENTS_KEY);
+        }
+
+        function getRegionBadge(region) {
+            const badges = {
+                'SEA': 'region-badge region-sea',
+                'ASIA': 'region-badge region-asia',
+                'JAPAN': 'region-badge region-japan',
+                'GLOBAL': 'region-badge region-global'
+            };
+            return badges[region] || 'region-badge region-sea';
+        }
+
+        function getPinHtml(location) {
+            if (location) {
+                return `<p><i class="fas fa-map-marker-alt pin-icon"></i> <strong>Location:</strong> ${location}</p>`;
+            }
+            return '';
+        }
+
+        let calendar = null;
+
+        function initCalendar(viewType = 'dayGridMonth') {
+            const calendarEl = document.getElementById('calendar');
+            const customEvents = loadCustomEvents();
+            const allEvents = [...eventsData, ...customEvents];
+
+            const calendarEvents = allEvents.map(event => {
+                let eventColor = event.isCustom ? '#ffc107' : '#3788d8';
+                let titleText = event.isCustom ? `⭐ ${event.title}` : event.title;
+
+                return {
+                    id: event.id.toString(),
+                    title: titleText,
+                    start: event.start,
+                    end: event.end ? new Date(new Date(event.end).getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0] : event.start,
+                    color: eventColor,
+                    extendedProps: {
+                        location: event.location || 'TBA',
+                        region: event.region || 'Global',
+                        description: event.description || 'No description available.',
+                        isCustom: event.isCustom || false,
+                        originalTitle: event.title
+                    }
+                };
+            });
+
+            if (calendar) calendar.destroy();
+
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: viewType,
+                headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
+                events: calendarEvents,
+                eventClick: function (info) {
+                    const props = info.event.extendedProps;
+                    const eventTitle = props.originalTitle || info.event.title.replace('⭐ ', '');
+                    const regionBadgeClass = getRegionBadge(props.region);
+
+                    let modalHtml = `
+                        <div class="event-detail-card">
+                            <h4>${eventTitle}</h4>
+                            <span class="region-badge ${regionBadgeClass}">${props.region || 'Global'}</span>
+                            ${getPinHtml(props.location)}
+                            <p><i class="fas fa-calendar-day me-2"></i> <strong>Date:</strong> ${info.event.start.toLocaleDateString()} ${info.event.end ? ' - ' + new Date(info.event.end).toLocaleDateString() : ''}</p>
+                            <p><i class="fas fa-info-circle me-2"></i> <strong>Details:</strong> ${props.description}</p>
+                            ${props.isCustom ? '<p class="text-warning mt-2"><i class="fas fa-star"></i> This is a custom event you added!</p>' : ''}
+                        </div>
+                    `;
+
+                    if (props.location && props.location !== 'TBA') {
+                        const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(props.location)}`;
+                        modalHtml += `<a href="${mapLink}" target="_blank" class="btn btn-sm btn-outline-primary mt-2"><i class="fas fa-external-link-alt"></i> View on Google Maps</a>`;
+                    }
+
+                    $('#eventDetailBody').html(modalHtml);
+                    new bootstrap.Modal(document.getElementById('eventDetailModal')).show();
+                },
+                eventDidMount: function (info) {
+                    if (info.event.extendedProps.isCustom) {
+                        $(info.el).css('background-color', '#ffc107').css('border-color', '#e0a800');
+                    }
+                },
+                height: 'auto',
+                aspectRatio: 1.5
+            });
+            calendar.render();
+        }
+
+        function addCustomEvent() {
+            const name = $('#customEventName').val().trim();
+            const date = $('#customEventDate').val();
+            const location = $('#customEventLocation').val().trim();
+            const desc = $('#customEventDesc').val().trim();
+
+            if (!name || !date) {
+                alert('Please enter an event name and date!');
+                return;
+            }
+
+            const newEvent = {
+                title: name, start: date, end: date,
+                location: location || 'Custom Location',
+                region: 'Custom',
+                description: desc || 'Custom event added by user.',
+                isCustom: true
+            };
+
+            saveCustomEvent(newEvent);
+            $('#customEventName, #customEventDate, #customEventLocation, #customEventDesc').val('');
+            initCalendar(calendar.view.type);
+            alert('✅ Custom event added!');
+        }
+
+        function resetCustomEvents() {
+            if (confirm('Delete ALL custom events?')) {
+                deleteAllCustomEvents();
+                initCalendar(calendar.view.type);
+                alert('All custom events cleared.');
+            }
+        }
+
+        $(document).ready(function () {
+            $('#customEventDate').val(new Date().toISOString().split('T')[0]);
+            initCalendar('dayGridMonth');
+
+            $('#monthViewBtn').click(function () {
+                $(this).addClass('active'); $('#weekViewBtn').removeClass('active');
+                initCalendar('dayGridMonth');
+            });
+            $('#weekViewBtn').click(function () {
+                $(this).addClass('active'); $('#monthViewBtn').removeClass('active');
+                initCalendar('timeGridWeek');
+            });
+            $('#addCustomEventBtn').click(addCustomEvent);
+            $('#resetCustomEventsBtn').click(resetCustomEvents);
+        });
+    </script>
+</body>
+
+</html>
